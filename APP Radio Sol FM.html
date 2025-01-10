@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Rádio Online</title>
+    <style>
+        body {
+            background-image: url('assets/img/APPfundoSol.jpg'); /* Caminho relativo */;
+            font-family: Arial Black, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        header, footer {
+            color: rgba(0, 0, 0, 0.863);
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 15px;
+            padding: 20px;
+            max-width: 300px;
+            text-align: center;
+        }
+        .logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                flex-direction: column;
+            }
+        }
+          /* Estilos do botão de fechar */
+          .close-button {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 90px;
+            background-color: #ffd000;
+            color: #242323;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="C:\App SolFm\assets\img\SOLFM.png" alt="Logo da Rádio" class="logo">
+    <h1>RÁDIO SOL FM</h1>
+    <h2>103,9</h2>
+</header>
+
+<div class="container">
+    <div class="card">
+        <audio controls>
+            <source src="https://stream.zeno.fm/mmzm4njsgtbtv" type="audio/mpeg">
+            Seu navegador não suporta o elemento de áudio.
+        </audio>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; Você em primeiro lugar</p>
+</footer>
+
+ <!-- Botão de fechar -->
+ <button class="close-button" onclick="window.close()">Fechar</button>
+</body>
+</html>
