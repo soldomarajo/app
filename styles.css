@@ -2,12 +2,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-image: url('background.jpg'); /* Caminho para a imagem */
+    background-size: cover; /* Para cobrir toda a área */
+    background-position: center; /* Para centralizar a imagem */
     color: #333;
 }
 
 header {
-    background: #ffcc00;
+    background: rgba(255, 204, 0, 0.8); /* Fundo semi-transparente */
     padding: 20px;
     text-align: center;
 }
@@ -24,6 +26,6 @@ main {
 footer {
     text-align: center;
     padding: 10px 0;
-    background: #333;
+    background: rgba(51, 51, 51, 0.8); /* Fundo semi-transparente */
     color: #fff;
 }
