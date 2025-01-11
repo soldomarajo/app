@@ -35,3 +35,14 @@ footer {
     background: rgba(51, 51, 51, 0.8);
     color: #fff;
 }
+header h1 {
+    font-size: 2.5em; /* Tamanho da fonte para o título */
+    font-family: 'Arial', sans-serif; /* Tipo da fonte para o título */
+    color: #ff6600; /* Cor do texto (opcional) */
+}
+
+header p {
+    font-size: 1.5em; /* Tamanho da fonte para o subtítulo */
+    font-family: 'Arial', sans-serif; /* Tipo da fonte para o subtítulo */
+    color: #000; /* Cor do texto (opcional) */
+}
