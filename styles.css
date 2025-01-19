@@ -15,7 +15,7 @@ header {
 }
 
 .logo {
-    width: 100px; /* Ajuste o tamanho conforme necessário */
+    width: 220px; /* Ajuste o tamanho conforme necessário */
     height: auto;
     margin-bottom: 10px; /* Espaço abaixo da logomarca */
 }
@@ -36,13 +36,28 @@ footer {
     color: #fff;
 }
 header h1 {
-    font-size: 2.5em; /* Tamanho da fonte para o título */
-    font-family: 'Arial', sans-serif; /* Tipo da fonte para o título */
-    color: #ff6600; /* Cor do texto (opcional) */
+    font-size: 2.2em; /* Tamanho da fonte para o título */
+    font-family: 'Arial Black', sans-serif; /* Tipo da fonte para o título */
+    color: #ff0000; /* Cor do texto (opcional) */
 }
 
 header p {
-    font-size: 1.5em; /* Tamanho da fonte para o subtítulo */
+    font-size: 1.8em; /* Tamanho da fonte para o subtítulo */
     font-family: 'Arial', sans-serif; /* Tipo da fonte para o subtítulo */
+    font-weight: bold;
     color: #000; /* Cor do texto (opcional) */
+
 }
+          /* Estilos do botão de fechar */
+          .close-button {
+            display: block;
+            margin: 20px auto;
+            padding: 20px 120px;
+            background-color: #ffd000;
+            color: #242323;
+            border: none;
+            border-radius: 30px;
+            font-size: 19px;
+            font-weight: bold;
+            cursor: pointer;
+        }
