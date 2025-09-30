@@ -13,21 +13,68 @@
         <h1>RÁDIO SOL FM</h1>
         <p>103,9 MHz</p>
     </header>
+    <!-- Espectro de Áudio -->
+    <div class="spectrum-container">
+        <canvas id="spectrum-canvas"></canvas>
+        <div class="spectrum-bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
     <main>
-        <audio controls>
+        <div class="audio-container">
+        <audio controls crossorigin="anonymous">
             <source src="https://stream.zeno.fm/mmzm4njsgtbtv" type="audio/mpeg">
+            <source src="https://stream-174.zeno.fm/mmzm4njsgtbtv" type="audio/mpeg">
+            <source src="https://stream-175.zeno.fm/mmzm4njsgtbtv" type="audio/mpeg">
+            <source src="https://stream-176.zeno.fm/mmzm4njsgtbtv" type="audio/mpeg">
             Seu navegador não suporta o elemento de áudio.
         </audio>
+        </div>
+    </div>
     </main>
     <footer>
+        <div>
+            <img src="logo_2.png" alt="Logo da Rádio Sol FM" class="logo_2"> <!-- Logomarca -->
+        </div>
         <p>© Você em primeiro lugar</p>
     </footer>
-    <script src="script.js"></script>
-
     <!-- Botão de fechar -->
     <button class="close-button" onclick="window.close()">Fechar</button>
+    
     <!--Botão Chat Online-->
     <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=ZX4aPMtGcNc5"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>

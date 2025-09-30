@@ -5,19 +5,37 @@ body {
     background-image: url('background.jpg'); /* Caminho para a imagem de fundo */
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 header {
-    background: rgba(255, 204, 0, 0.8);
     padding: 20px;
     text-align: center;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .logo {
-    width: 220px; /* Ajuste o tamanho conforme necessário */
+    width: 170px;
     height: auto;
-    margin-bottom: 10px; /* Espaço abaixo da logomarca */
+    margin: 0 auto 10px auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 h1 {
@@ -27,14 +45,59 @@ h1 {
 main {
     padding: 20px;
     text-align: center;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.audio-container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 footer {
     text-align: center;
-    padding: 10px 0;
+    padding: 20px;
     background: rgba(51, 51, 51, 0.8);
     color: #fff;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 20px 20px 0 0;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
 }
+
+.logo_2 {
+    width: 70px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.logo_2:hover {
+    transform: scale(1.1);
+}
+
+footer p {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
 header h1 {
     font-size: 2.2em; /* Tamanho da fonte para o título */
     font-family: 'Arial Black', sans-serif; /* Tipo da fonte para o título */
@@ -46,18 +109,365 @@ header p {
     font-family: 'Arial', sans-serif; /* Tipo da fonte para o subtítulo */
     font-weight: bold;
     color: #000; /* Cor do texto (opcional) */
-
 }
-          /* Estilos do botão de fechar */
-          .close-button {
-            display: block;
-            margin: 20px auto;
-            padding: 20px 120px;
-            background-color: #ffd000;
-            color: #242323;
-            border: none;
-            border-radius: 30px;
-            font-size: 19px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+
+/* Espectro de Áudio */
+.spectrum-container {
+    width: 100%;
+    max-width: 600px;
+    height: 180px;
+    margin: 0 auto;
+    position: relative;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 
+        0 8px 32px rgba(245, 221, 11, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    align-self: center;
+}
+
+.spectrum-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        transparent 15%, 
+        rgba(255, 107, 0, 0.1) 50%, 
+        transparent 100%);
+    pointer-events: none;
+}
+
+#spectrum-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.spectrum-bars {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 130px;
+    padding: 0 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.bar {
+    width: 24px;
+    min-height: 28px;
+    background: linear-gradient(to top, 
+        #ff4500 0%,
+        #ff8533 50%,
+        #ffaa66 80%,
+        #ffdd99 100%);
+    border-radius: 8px 8px 3px 3px;
+    transition: height 0.1s ease-out;
+    box-shadow: 
+        0 0 15px rgba(255, 107, 0, 0.6),
+        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+    animation: pulse 2s ease-in-out infinite alternate;
+}
+
+.bar:nth-child(odd) {
+    animation-delay: 0.1s;
+}
+
+.bar:nth-child(even) {
+    animation-delay: 0.2s;
+}
+
+.bar:nth-child(3n) {
+    animation-delay: 0.3s;
+}
+
+@keyframes pulse {
+    0% {
+        height: 10px;
+        box-shadow: 0 0 55px rgba(255, 107, 0, 0.4);
+    }
+    100% {
+        height: 60px;
+        box-shadow: 0 0 25px rgba(255, 107, 0, 0.9);
+    }
+}
+
+/* Efeito quando o áudio está tocando */
+body.playing .bar {
+    animation-duration: 0.8s;
+}
+
+body.playing .spectrum-container {
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(255, 107, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.player-container {
+    position: relative;
+}
+
+audio {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 50px;
+    background-color: var(--white);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px auto;
+    display: block;
+}
+
+/* Status do Stream */
+.stream-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.retry-button, .custom-url-button {
+    display: none;
+    padding: 8px 16px;
+    margin: 5px;
+    border: none;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.retry-button {
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    color: white;
+}
+
+.retry-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+.custom-url-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.custom-url-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+#cancel-custom-url {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#add-custom-url:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+#cancel-custom-url:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes pulse-status {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes pulse-error {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Estilos do botão de fechar */
+.close-button {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 80px;
+    background-color: #ffd000;
+    color: #242323;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    width: 100%;
+}
+
+.close-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background-color: #ffdd33;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    header {
+        padding: 15px;
+        margin: 0 10px;
+        border-radius: 0 0 15px 15px;
+    }
+    
+    .logo {
+        width: 120px;
+    }
+    
+    header h1 {
+        font-size: 1.8em;
+    }
+    
+    header p {
+        font-size: 1.4em;
+    }
+    
+    main {
+        padding: 15px;
+        gap: 15px;
+        margin: 0 10px;
+    }
+    
+    .spectrum-container {
+        height: 140px;
+        padding: 20px;
+        margin: 0 10px;
+    }
+    
+    .spectrum-bars {
+        height: 100px;
+    }
+    
+    .bar {
+        width: 10px;
+    }
+    
+    audio {
+        max-width: 100%;
+    }
+    
+    .close-button {
+        padding: 12px 60px;
+        font-size: 14px;
+        margin: 15px auto;
+    }
+    
+    footer {
+        padding: 15px;
+        margin: 0 10px;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .logo_2 {
+        width: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 10px;
+        margin: 0 5px;
+    }
+    
+    .logo {
+        width: 100px;
+    }
+    
+    header h1 {
+        font-size: 1.5em;
+    }
+    
+    header p {
+        font-size: 1.2em;
+    }
+    
+    main {
+        padding: 10px;
+        gap: 10px;
+        margin: 0 5px;
+    }
+    
+    .spectrum-container {
+        height: 120px;
+        padding: 15px;
+        margin: 0 5px;
+    }
+    
+    .spectrum-bars {
+        height: 80px;
+        padding: 0 5px;
+    }
+    
+    .bar {
+        width: 8px;
+    }
+    
+    .close-button {
+        padding: 10px 40px;
+        font-size: 12px;
+        margin: 10px auto;
+    }
+    
+    footer {
+        padding: 10px;
+        margin: 0 5px;
+    }
+    
+    .logo_2 {
+        width: 30px;
+    }
+    
+    footer p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    body {
+        padding: 20px;
+    }
+    
+    header, main, footer {
+        max-width: 1000px;
+    }
+    
+    .spectrum-container {
+        max-width: 800px;
+        height: 220px;
+    }
+    
+    .spectrum-bars {
+        height: 170px;
+    }
+    
+    .audio-container {
+        max-width: 700px;
+    }
+    
+    audio {
+        max-width: 600px;
+    }
+}
